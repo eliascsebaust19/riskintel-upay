@@ -1,0 +1,27 @@
+{
+  "evaluation_strategy": "Temporal Out-of-Time Split (70/15/15)",
+  "train_samples": 8400,
+  "val_samples": 1800,
+  "test_samples": 1800,
+  "temporal_test_start": "2026-10-02T14:35:14.489785+00:00",
+  "temporal_test_end": "2026-10-07T03:44:43.561782+00:00",
+  "lightgbm_metrics": {
+    "roc_auc": 0.9825,
+    "pr_auc": 0.9151,
+    "brier_score": 0.0371,
+    "false_positive_rate": 0.0262,
+    "recall": 0.8095,
+    "precision": 0.8467,
+    "f1_score": 0.8277
+  },
+  "rule_based_baseline": {
+    "false_positive_rate": 0.036,
+    "recall": 0.4396,
+    "precision": 0.6857,
+    "f1_score": 0.5357
+  },
+  "relative_improvements": {
+    "fpr_reduction_pct": 27.24,
+    "recall_gain_pct": 84.15
+  }
+}

@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: riskintel-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - UPAY_RISK_API_KEY=upay_risk_intel_secret_key_2026
+      - API_BEARER_TOKEN=upay_risk_intel_prod_jwt_token_2026
+      - ADMIN_SECRET_KEY=upay_risk_intel_admin_secret_key_2026
+      - DEV_MODE=true
+      - RATE_LIMIT_WINDOW_MS=60000
+      - RATE_LIMIT_MAX_REQUESTS=120
+      - OTP_RATE_LIMIT_MAX_REQUESTS=10
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8000
+        NEXT_PUBLIC_UPAY_RISK_API_KEY: upay_risk_intel_secret_key_2026
+    container_name: riskintel-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_UPAY_RISK_API_KEY=upay_risk_intel_secret_key_2026
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+

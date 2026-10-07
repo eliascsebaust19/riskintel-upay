@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+venv/
+.venv/
+backend/venv/
+
+# Next.js build output
+.next/
+frontend/.next/
+*.tsbuildinfo
+
+# Python artifacts
+__pycache__/
+backend/__pycache__/
+tests/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local databases and runtime state
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+data/*.sqlite*
+
+# Logs and environment variables
+*.log
+.env
+.env.local
+frontend/.env.local
+.env*.local
+
+# Vercel deployment cache
+.vercel/
+frontend/.vercel/
+
+# OS files
+.DS_Store
+Thumbs.db
